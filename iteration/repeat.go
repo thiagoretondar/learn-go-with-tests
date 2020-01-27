@@ -1,11 +1,14 @@
 package iteration
 
-const repeatCount = 5
+func Repeat(character string, count int) (repeated string) {
+	// there's no way to repeat zero or negative times
+	if count <= 0 {
+		return character
+	}
 
-func Repeat(character string) string {
-	var repeated string
-	for i := 0; i < repeatCount; i++ {
+	for i := 0; i < count; i++ {
 		repeated += character
 	}
+
 	return repeated
 }
