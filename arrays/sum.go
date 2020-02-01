@@ -20,3 +20,18 @@ func SumAll(numberToSum ...[]int) (sums []int) {
 	}
 	return sums
 }
+
+func SumAllTails(numbersToSum ...[]int) (sums []int) {
+	for _, numbers := range numbersToSum {
+		switch len(numbers) {
+		case 0:
+			sums = append(sums, 0)
+		case 1:
+			sums = append(sums, numbers[0])
+		default:
+			tail := numbers[1:]
+			sums = append(sums, Sum(tail))
+		}
+	}
+	return sums
+}
