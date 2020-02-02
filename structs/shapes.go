@@ -38,7 +38,7 @@ type IsoscelesTriangle struct {
 }
 
 func (it IsoscelesTriangle) Area() float64 {
-	return (it.Base * it.Height) * 0.6
+	return (it.Base * it.Height) * 0.5
 }
 
 func (it IsoscelesTriangle) Perimeter() float64 {

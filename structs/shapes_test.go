@@ -3,42 +3,64 @@ package structs
 import "testing"
 
 func TestPerimeter(t *testing.T) {
-	checkPerimeter := func(t *testing.T, shape Shape, want float64) {
-		t.Helper()
-		got := shape.Perimeter()
-		if got != want {
-			t.Errorf("got %.2f want %.2f", got, want)
-		}
+
+	perimeterTests := []struct {
+		name         string
+		shape        Shape
+		hasPerimeter float64
+	}{
+		{
+			name:         "Rectangle",
+			shape:        Rectangle{Width: 10, Height: 10},
+			hasPerimeter: 40,
+		},
+		{
+			name:         "Circle",
+			shape:        Circle{Radius: 10},
+			hasPerimeter: 62.83185307179586,
+		},
+		{
+			name:         "Isosceles Triangle",
+			shape:        IsoscelesTriangle{Base: 6.0, Height: 12.0},
+			hasPerimeter: 30,
+		},
 	}
 
-	t.Run("rectangles", func(t *testing.T) {
-		rectangle := Rectangle{10.0, 10.0}
-		want := 40.0
-		checkPerimeter(t, rectangle, want)
-	})
-
-	t.Run("circles", func(t *testing.T) {
-		circle := Circle{10}
-		want := 62.83185307179586
-		checkPerimeter(t, circle, want)
-	})
+	for _, tt := range perimeterTests {
+		got := tt.shape.Perimeter()
+		if got != tt.hasPerimeter {
+			t.Errorf("%#v got %g hasArea %g", tt.shape, got, tt.hasPerimeter)
+		}
+	}
 }
 
 func TestArea(t *testing.T) {
 	areaTests := []struct {
-		name  string
-		shape Shape
-		want  float64
+		name    string
+		shape   Shape
+		hasArea float64
 	}{
-		{name: "Rectangle", shape: Rectangle{Width: 12, Height: 6}, want: 72},
-		{name: "Circle", shape: Circle{Radius: 10}, want: 314.1592653589793},
-		{name: "Isosceles Triangle", shape: IsoscelesTriangle{Base: 12, Height: 6}, want: 36.0},
+		{
+			name:    "Rectangle",
+			shape:   Rectangle{Width: 12, Height: 6},
+			hasArea: 72,
+		},
+		{
+			name:    "Circle",
+			shape:   Circle{Radius: 10},
+			hasArea: 314.1592653589793,
+		},
+		{
+			name:    "Isosceles Triangle",
+			shape:   IsoscelesTriangle{Base: 12, Height: 6},
+			hasArea: 36.0,
+		},
 	}
 
 	for _, tt := range areaTests {
 		got := tt.shape.Area()
-		if got != tt.want {
-			t.Errorf("%#v got %.2f want %.2f", tt.name, got, tt.want)
+		if got != tt.hasArea {
+			t.Errorf("%#v got %.2f hasArea %.2f", tt.name, got, tt.hasArea)
 		}
 	}
 }
