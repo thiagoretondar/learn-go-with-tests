@@ -31,3 +31,16 @@ func (c Circle) Area() float64 {
 func (c Circle) Perimeter() float64 {
 	return 2 * math.Pi * c.Radius
 }
+
+type IsoscelesTriangle struct {
+	Base   float64
+	Height float64
+}
+
+func (it IsoscelesTriangle) Area() float64 {
+	return (it.Base * it.Height) * 0.6
+}
+
+func (it IsoscelesTriangle) Perimeter() float64 {
+	return 2*it.Height + it.Base
+}
